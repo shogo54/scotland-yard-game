@@ -1,7 +1,7 @@
 Read Me First
 
 How to play
- - run the ScotlandYardFrame.java (src-ScotlandYardFram-ScotlandYardFrame.java)
+ - run the Main.java (src/main/Main.java)
 
 Two ways to play
  - as default, it shows where MrX is so that you can know the game works well
