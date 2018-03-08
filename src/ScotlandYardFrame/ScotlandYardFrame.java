@@ -54,14 +54,14 @@ public class ScotlandYardFrame extends JFrame {
 	// special option for debugging purpose
 	// show MrX always
 	// determined by Main.DEBUG
-	private boolean showMrX;
+	private boolean revealMrX;
 
 	public ScotlandYardFrame() throws IOException {
 		// read the image
 		final Image img = ImageIO.read(new File("files/sybig.png"));
 		graph = new ScotlandYardGraph();
 		gm = new GameMaster(graph);
-		showMrX = Main.DEBUG;
+		revealMrX = Main.DEBUG;
 
 		canvas = new JPanel() {
 			private static final long serialVersionUID = 1L;
@@ -73,7 +73,7 @@ public class ScotlandYardFrame extends JFrame {
 				g.drawImage(img, 0, 0, null);
 
 				// if mrx has to show up, do so
-				if (gm.doesMrxShowUp() || showMrX) {
+				if (gm.doesMrxShowUp() || revealMrX) {
 					// coloring Mrx
 					Point Mrx = graph.getPointMap().get(gm.getMrx().getPosition().getName());
 					g.setColor(Color.BLACK);
