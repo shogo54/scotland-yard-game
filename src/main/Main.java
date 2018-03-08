@@ -16,7 +16,7 @@ public class Main {
 	// can be changed to Clever or Random
 	public final static MrXType MRXTYPE = MrXType.Random;
 
-	// inner enum
+	// inner enumerator
 	public enum MrXType {
 		Random, Clever
 	}

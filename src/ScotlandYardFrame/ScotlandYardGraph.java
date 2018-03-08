@@ -65,9 +65,11 @@ public class ScotlandYardGraph {
 	 */
 	public Graph readGraphFromFile(InputStream in) throws IOException {
 		Graph retVal = new Graph();
+		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(in);
 		int numNode = sc.nextInt();
 		int numEdge = sc.nextInt();
+
 		while (sc.hasNextLine()) {
 			String line = sc.nextLine();
 			if (line.isEmpty())
@@ -76,17 +78,21 @@ public class ScotlandYardGraph {
 			int lastIndex = line.lastIndexOf(" ");
 			Node n1 = retVal.getOrCreateNode(line.substring(0, index));
 			Node n2 = retVal.getOrCreateNode(line.substring(index + 1, lastIndex));
-			String initial= line.substring(lastIndex + 1);
-			String way="";
-			switch(initial){
+			String initial = line.substring(lastIndex + 1);
+			String way = "";
+			switch (initial) {
 			case "T":
-				way="TAXI"; break;
+				way = "TAXI";
+				break;
 			case "B":
-				way="BUS"; break;
-			case "U": 
-				way = "UNDERGROUND"; break;
+				way = "BUS";
+				break;
+			case "U":
+				way = "UNDERGROUND";
+				break;
 			case "S":
-				way = "BLACK"; break;
+				way = "BLACK";
+				break;
 			}
 			n2.addUndirectedEdgeToNode(n1, way);
 		}
@@ -136,8 +142,10 @@ public class ScotlandYardGraph {
 	 */
 	public Map<String, Point> readPositionPoints(String filename) throws IOException {
 		Map<String, Point> map = new TreeMap<String, Point>();
+		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(new File(filename));
 		int numNode = sc.nextInt();
+
 		while (sc.hasNextLine()) {
 			String line = sc.nextLine();
 			if (line.isEmpty())
@@ -155,15 +163,15 @@ public class ScotlandYardGraph {
 		}
 		return map;
 	}
-	
-	//getter
-	public Map<String, Point> getPointMap(){
+
+	// getter
+	public Map<String, Point> getPointMap() {
 		return pointMap;
 	}
-	
-	//getter
-	public Graph getGraph(){
+
+	// getter
+	public Graph getGraph() {
 		return graph;
 	}
-	
+
 }

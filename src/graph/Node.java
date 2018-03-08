@@ -23,7 +23,7 @@ import java.util.TreeSet;
  * mathematical background because I almost always use the term "node" instead
  * of "vertex".
  * 
- * @author jspacco
+ * @author Shogo Akiyama
  *
  */
 public class Node implements Comparable<Node> {
@@ -31,8 +31,8 @@ public class Node implements Comparable<Node> {
 	private String name;
 	private Map<Node, List<String>> neighbors;
 	// list<String> is the name of the types of transportation
-	private boolean occupied;
-	private boolean hiding;
+	private boolean occupied; // occupied is true if a detective is there
+	private boolean hiding; // hiding is true is Mr.X is there
 
 	/**
 	 * Create a new node with the given name. The newly created node should have
@@ -60,7 +60,7 @@ public class Node implements Comparable<Node> {
 	/**
 	 * Return the name of the node, which is a String.
 	 * 
-	 * @return
+	 * @return name
 	 */
 	public String getName() {
 		return name;
@@ -70,7 +70,7 @@ public class Node implements Comparable<Node> {
 	 * Return a collection of nodes that the current node is connected to by an
 	 * edge.
 	 * 
-	 * @return
+	 * @return retVal
 	 */
 	public Collection<Node> getNeighbors() {
 		TreeSet<Node> retVal = new TreeSet<Node>();
@@ -84,7 +84,7 @@ public class Node implements Comparable<Node> {
 	 * Add a directed edge to the given node using the given weight.
 	 * 
 	 * @param n
-	 * @param weight
+	 * @param type
 	 */
 	public void addDirectedEdgeToNode(Node n, String type) {
 		put(neighbors, n, type);
@@ -95,7 +95,7 @@ public class Node implements Comparable<Node> {
 	 * than an undirected edge can be implemented using two directed edges.
 	 * 
 	 * @param n
-	 * @param weight
+	 * @param type
 	 */
 	public void addUndirectedEdgeToNode(Node n, String type) {
 		addDirectedEdgeToNode(n, type);
@@ -138,7 +138,7 @@ public class Node implements Comparable<Node> {
 	 * false otherwise.
 	 * 
 	 * @param other
-	 * @return
+	 * @return boolean 
 	 */
 	public boolean hasEdge(Node other) {
 		if (neighbors.containsKey(other))
@@ -187,7 +187,6 @@ public class Node implements Comparable<Node> {
 	@Override
 	public String toString() {
 		// Just return the Node's name
-		// toString() really helps you use the debugger
 		return name;
 	}
 }

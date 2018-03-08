@@ -30,7 +30,6 @@ import javax.swing.JPopupMenu;
 import graph.Node;
 import main.Main;
 import player.Detective;
-import player.MrX;
 import player.Person.Ticket;
 
 /**
@@ -141,14 +140,14 @@ public class ScotlandYardFrame extends JFrame {
 		// actually difficult
 		// and I can't remember which stackoverflow articles helped me figure it
 		// out
-		canvas.setPreferredSize(new Dimension(img.getWidth(null), img.getHeight(null)));
+		canvas.setPreferredSize(new Dimension(img.getWidth(null) + 500, img.getHeight(null)+23));
 
 		// System.out.printf("width=%d, height=%d\n", img.getWidth(null),
 		// img.getHeight(null));
 		this.getContentPane().add(canvas, BorderLayout.CENTER);
 		this.setResizable(false);
 		this.pack();
-		this.setLocation(550, 50);
+		this.setLocation(0, 0);
 
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {

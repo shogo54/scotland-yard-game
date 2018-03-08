@@ -6,7 +6,7 @@ import java.util.*;
  * A basic representation of a graph that can perform BFS, DFS, Dijkstra, and
  * Prim-Jarnik's algorithm for a minimum spanning tree.
  * 
- * @author jspacco
+ * @author Shogog Akiyama
  *
  */
 public class Graph {
@@ -81,7 +81,7 @@ public class Graph {
 	public int getNumOfAllNodes() {
 		int count = 0;
 		for (Iterator<String> iterator = map.keySet().iterator(); iterator.hasNext();) {
-			String s = iterator.next();
+			iterator.next();
 			count++;
 		}
 		return count;
@@ -231,43 +231,4 @@ public class Graph {
 		}
 	}
 
-	private class Edge implements Comparable<Edge> {
-		String start;
-		String destination;
-		int cost;
-
-		private Edge(String s, String d, int c) {
-			start = s;
-			destination = d;
-			cost = c;
-		}
-
-		@Override
-		public boolean equals(Object o) {
-			if (!(o instanceof Edge)) {
-				return false;
-			}
-			Edge other = (Edge) o;
-			if (start.equals(other.start) && destination.equals(other.destination))
-				return true;
-			else if (start.equals(other.destination) && destination.equals(other.start))
-				return true;
-			return false;
-		}
-
-		@Override
-		public int hashCode() {
-			return Objects.hash(start, destination, cost);
-		}
-
-		@Override
-		public int compareTo(Edge other) {
-			return cost - other.cost;
-		}
-
-		@Override
-		public String toString() {
-			return start + "-" + destination + "-" + cost;
-		}
-	}
 }
