@@ -2,6 +2,7 @@ package graph;
 
 import java.io.*;
 import java.util.*;
+
 /**
  * A basic representation of a graph that can perform BFS, DFS, Dijkstra, and
  * Prim-Jarnik's algorithm for a minimum spanning tree.
@@ -20,9 +21,9 @@ public class Graph {
 	/**
 	 * Return the {@link Node} with the given name.
 	 * 
-	 * If no {@link Node} with the given name exists, create a new node with
-	 * the given name and return it. Subsequent calls to this method with the
-	 * same name should then return the node just created.
+	 * If no {@link Node} with the given name exists, create a new node with the
+	 * given name and return it. Subsequent calls to this method with the same
+	 * name should then return the node just created.
 	 * 
 	 * @param name
 	 * @return
@@ -85,16 +86,6 @@ public class Graph {
 			count++;
 		}
 		return count;
-	}
-
-	public boolean isCompleteGraph() {
-		int nodeNum = getNumOfAllNodes();
-		int edgeNum = getNumOfAllWays();
-
-		if (edgeNum == nodeNum * (nodeNum - 1) / 2) {
-			return true;
-		}
-		return false;
 	}
 
 	/**

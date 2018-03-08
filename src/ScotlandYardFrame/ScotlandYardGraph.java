@@ -37,18 +37,18 @@ public class ScotlandYardGraph {
 	/**
 	 * Read a Scotland Yard graph file from an input stream. The file contains a
 	 * header line with the number of locations on the game board (which is 199)
-	 * then the number of links between those locations (469). Locations are
+	 * then the number of links between those locations (470). Locations are
 	 * always numbered starting at 1.
 	 * 
-	 * Each of the 469 links will contain the two endpoints of the link followed
-	 * by the transportation type, which is either T for Taxi, B for Bus, or U
-	 * for Underground (subway).
+	 * Each of the 470 links will contain the two end-points of the link followed
+	 * by the transportation type, which is either T for Taxi, B for Bus, U
+	 * for Underground (subway), or S (Ship, which requires black card).
 	 * 
 	 * See files/scotmap.txt for the full file. The first few lines of the file
 	 * look like this:
 	 * 
 	 * <pre>
-	 * 199 469
+	 * 199 470
 	 * 1 8 T
 	 * 1 9 T
 	 * 1 58 B
@@ -104,7 +104,6 @@ public class ScotlandYardGraph {
 	}
 
 	/**
-	 * 
 	 * Read from the given inputstream a mapping of numbered locations on the
 	 * Scotland Yard game board to their corresponding x y coordinates, in a
 	 * format like this:

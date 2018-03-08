@@ -117,12 +117,11 @@ public class GameMaster {
 		if (stuck == detectives.size()) {
 			return mrx;
 		}
-		//victory condition of detectives
-		if(mrx.possibleMoves().size()==0){
+		// victory condition of detectives
+		if (mrx.possibleMoves().size() == 0) {
 			return detectives.get(0);
 		}
-		
-		
+
 		return null;
 	}
 
