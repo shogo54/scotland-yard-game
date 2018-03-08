@@ -3,8 +3,16 @@ package player;
 import java.util.Map;
 
 import graph.Node;
-import player.Person.Ticket;
 
+/**
+ * Class to represent a detective who is seeking Mr.X
+ * Inherit from Person class
+ * 
+ * It gets the information where to move by the user
+ * 
+ * @author Shogo Akiyama
+ *
+ */
 public class Detective extends Person{
 
 	public Detective(String s, Node startPoint, Map<Ticket, Integer> initialTickets) {

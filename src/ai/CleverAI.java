@@ -9,6 +9,18 @@ import graph.Node;
 import player.Detective;
 import player.MrX;
 
+/**
+ * Class to represent an AI 
+ * Inherit from RandomAI class (so implement AI)
+ * 
+ * This class has the decision making based on the current positions of 
+ * all Detectives. It tries to avoid the places where the Detectives can be. 
+ * 
+ * It gets the information where to move by the user
+ * 
+ * @author Shogo Akiyama
+ *
+ */
 public class CleverAI extends RandomAI{
 
 	public CleverAI(MrX mrx) {

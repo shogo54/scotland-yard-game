@@ -2,10 +2,8 @@ package ScotlandYardFrame;
 
 import java.awt.Point;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -16,6 +14,11 @@ import java.util.TreeSet;
 import graph.Graph;
 import graph.Node;
 
+/**
+ * 
+ * @author Shogo Akiyama
+ *
+ */
 public class SYSolver {
 	/**
 	 * Read a Scotland Yard graph file from an input stream. The file contains a

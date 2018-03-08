@@ -13,6 +13,12 @@ import player.MrX;
 import player.Person;
 import player.Person.Ticket;
 
+/**
+ * Class to represent a game master who control the game
+ * 
+ * @author Shogo Akiyama
+ *
+ */
 public class GameMaster {
 
 	private final String[] startPoints = { "13", "26", "29", "34", "50", "53", "91", "94", "103", "112", "117", "132",

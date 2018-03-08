@@ -12,6 +12,12 @@ import java.util.TreeMap;
 import graph.Graph;
 import graph.Node;
 
+/**
+ * Class to represent a graph of Scotland Yard
+ * 
+ * @author Shogo Akiyama
+ *
+ */
 public class ScotlandYardGraph {
 
 	// Map from location names (such as "1") to their (x, y) coordinates on the
@@ -52,7 +58,6 @@ public class ScotlandYardGraph {
 	 * ...
 	 * </pre>
 	 * 
-	 * Keep in mind that some nodes may be connected by both bus and by taxi.
 	 * 
 	 * @param in
 	 * @return

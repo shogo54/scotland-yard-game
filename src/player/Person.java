@@ -7,6 +7,15 @@ import java.util.TreeSet;
 
 import graph.Node;
 
+/**
+ * Abstract Class to represent a Person
+ * Extended by Detective class and Mr.X class
+ * 
+ * This class has all the methods related to tickets and the player position
+ * 
+ * @author Shogo Akiyama
+ *
+ */
 public abstract class Person {
 	protected String name;
 	protected Node position;

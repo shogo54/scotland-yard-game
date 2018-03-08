@@ -16,15 +16,9 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import javax.imageio.ImageIO;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -39,6 +33,15 @@ import player.Detective;
 import player.MrX;
 import player.Person.Ticket;
 
+/**
+ * Class to show the frame of the board game
+ * 
+ * Has most of the components necessary for the game: canvas (JPanel), graph
+ * (ScotlandYardGraph), gm (GameMaster), showMrX (boolean)
+ * 
+ * @author Shogo Akiyama
+ *
+ */
 @SuppressWarnings("serial")
 public class ScotlandYardFrame extends JFrame {
 
@@ -49,30 +52,17 @@ public class ScotlandYardFrame extends JFrame {
 	// game master
 	private GameMaster gm;
 
-	// special option
+	// special option for debugging purpose
 	// show MrX always
-	//determined by Main.DEBUG
-	private boolean showAlways;
-
-	// the number of moves we are tracking for Mr X (should be between 0 and 5)
-	private int numMoves = 0;
-	// What is the starting location of Mr X?
-	private String startNode = null;
-
-	// should we pay attention to the type of transportation Mr X might use?
-	// this will be set to true and false by an ActionListener
-	private boolean useTransportTypes = false;
-
-	// the type of transportation to be taken in the next 5 moves
-	// this will correctly be updated for you by an ActionListener
-	private List<String> transportTypes = Arrays.asList("any", "any", "any", "any", "any");
+	// determined by Main.DEBUG
+	private boolean showMrX;
 
 	public ScotlandYardFrame() throws IOException {
 		// read the image
 		final Image img = ImageIO.read(new File("files/sybig.png"));
 		graph = new ScotlandYardGraph();
 		gm = new GameMaster(graph);
-		showAlways = Main.DEBUG;
+		showMrX = Main.DEBUG;
 
 		canvas = new JPanel() {
 			private static final long serialVersionUID = 1L;
@@ -83,8 +73,8 @@ public class ScotlandYardFrame extends JFrame {
 				// first draw the map
 				g.drawImage(img, 0, 0, null);
 
-				//if mrx has to show up, do so
-				if (gm.doesMrxShowUp() || showAlways) {
+				// if mrx has to show up, do so
+				if (gm.doesMrxShowUp() || showMrX) {
 					// coloring Mrx
 					Point Mrx = graph.getPointMap().get(gm.getMrx().getPosition().getName());
 					g.setColor(Color.BLACK);
@@ -118,14 +108,14 @@ public class ScotlandYardFrame extends JFrame {
 				} else if (gm.getTurn() == Turn.MrX) {
 					System.out.println("--------------------------------------------------");
 					System.out.println("Turn of MrX");
-					
+
 					try {
 						gm.moveMrX();
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
+
 					System.out.println("\nTickets");
 					gm.showMrXTickets();
 					System.out.println("\nTravel Log");
@@ -352,10 +342,10 @@ public class ScotlandYardFrame extends JFrame {
 					Point clicked = e.getPoint();
 
 					Detective d = gm.getDetectives().get(gm.getTurn().NUM);
-					
+
 					// if there is no possible moves, skip his turn
-					if(d.possibleMoves().size()==0){
-						System.out.println("Detective "+ d.getName()+" cannot move");
+					if (d.possibleMoves().size() == 0) {
+						System.out.println("Detective " + d.getName() + " cannot move");
 						System.out.println("Skip his turn");
 						gm.nextTurn();
 					}

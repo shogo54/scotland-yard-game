@@ -2,6 +2,13 @@ package ScotlandYardFrame;
 
 import java.awt.Color;
 
+
+/**
+ * Enumerator that represents each character's turn
+ * 
+ * @author Shogo Akiyama
+ *
+ */
 public enum Turn {
 	A(0, Color.CYAN), B(1, Color.BLUE), C(2, Color.ORANGE), D(3, Color.MAGENTA), E(4, Color.PINK), MrX(99, Color.BLACK);
 

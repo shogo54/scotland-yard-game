@@ -9,6 +9,17 @@ import graph.Node;
 import player.MrX;
 import player.Person.Ticket;
 
+/**
+ * Class to represent a AI
+ * Implement AI interface 
+ * 
+ * This class's decision making is based on random chance.
+ * 
+ * It gets the information where to move by the user
+ * 
+ * @author Shogo Akiyama
+ *
+ */
 public class RandomAI implements AI {
 
 	GameMaster gmCopy;

@@ -5,12 +5,18 @@ import java.util.List;
 import java.util.Map;
 
 import ScotlandYardFrame.GameMaster;
-import ai.AI;
-import ai.CleverAI;
-import ai.RandomAI;
+import ai.*;
 import graph.Node;
 import main.Main;
 
+/**
+ * Class to represent a detective who is seeking Mr.X
+ * 
+ * It gets the information where to move by the user
+ * 
+ * @author Shogo Akiyama
+ *
+ */
 public class MrX extends Person {
 	protected List<Ticket> travelLog;
 	protected AI brain;
