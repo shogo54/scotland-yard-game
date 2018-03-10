@@ -125,12 +125,18 @@ public class GameMaster {
 		return null;
 	}
 
-	// getter
+	/**
+	 * getter
+	 * @return the mrx
+	 */
 	public MrX getMrx() {
 		return mrx;
 	}
 
-	// getter
+	/**
+	 * getter
+	 * @return the detectives 
+	 */
 	public List<Detective> getDetectives() {
 		return detectives;
 	}

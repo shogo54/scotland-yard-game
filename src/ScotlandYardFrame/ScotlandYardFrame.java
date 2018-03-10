@@ -2,9 +2,11 @@ package ScotlandYardFrame;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -26,7 +29,10 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.border.BevelBorder;
 
+import ScotlandYardFrame.DataPanel.PersonStatusPanel;
+import ScotlandYardFrame.DataPanel.StatusPanel;
 import graph.Node;
 import main.Main;
 import player.Detective;
@@ -55,13 +61,19 @@ public class ScotlandYardFrame extends JFrame {
 	// show MrX always
 	// determined by Main.DEBUG
 	private boolean revealMrX;
+	
+	final Image img;
+	public final int imgWidth;
+	public final int imgHeight;
 
 	public ScotlandYardFrame() throws IOException {
-		// read the image
-		final Image img = ImageIO.read(new File("files/sybig.png"));
 		graph = new ScotlandYardGraph();
 		gm = new GameMaster(graph);
 		revealMrX = Main.DEBUG;
+		// read the image
+		img = ImageIO.read(new File("files/sybig.png"));
+		imgWidth = img.getWidth(null);
+		imgHeight = img.getHeight(null) + 23;
 
 		canvas = new JPanel() {
 			private static final long serialVersionUID = 1L;
@@ -134,17 +146,17 @@ public class ScotlandYardFrame extends JFrame {
 						g.drawRect(nextPoint.x - 20, nextPoint.y - 20, 40, 40);
 					}
 				}
+				
+				//create each person's status part
+				
 			}
 		};
-		// figuring out the right sequence of these next few method calls was
-		// actually difficult
-		// and I can't remember which stackoverflow articles helped me figure it
-		// out
-		canvas.setPreferredSize(new Dimension(img.getWidth(null) + 500, img.getHeight(null)+23));
-
-		// System.out.printf("width=%d, height=%d\n", img.getWidth(null),
-		// img.getHeight(null));
-		this.getContentPane().add(canvas, BorderLayout.CENTER);
+		canvas.setPreferredSize(new Dimension(imgWidth, imgHeight));
+		
+		Container content = this.getContentPane();
+		content.add(canvas, BorderLayout.WEST);
+		content.add(new DataPanel(500, imgHeight),BorderLayout.EAST);
+		
 		this.setResizable(false);
 		this.pack();
 		this.setLocation(0, 0);
@@ -156,7 +168,6 @@ public class ScotlandYardFrame extends JFrame {
 		});
 
 		addMenu();
-
 		addMouseHandlers();
 
 	}
@@ -199,133 +210,8 @@ public class ScotlandYardFrame extends JFrame {
 		});
 		file.add(exit);
 		menuBar.add(file);
-
-		// // simple label for number of moves
-		// menuBar.add(new JLabel("# moves"));
-		//
-		// String[] numMovesString = new String[] { "0", "1", "2", "3", "4", "5"
-		// };
-		// JComboBox<String> numMovesSelector = new
-		// JComboBox<String>(numMovesString);
-		// // set max width of JComboBox
-		// // http://stackoverflow.com/questions/4629015/jcombobox-width
-		// numMovesSelector.setMaximumSize(numMovesSelector.getPreferredSize());
-		// numMovesSelector.addActionListener(new ActionListener() {
-		// @Override
-		// public void actionPerformed(ActionEvent e) {
-		// // ignore that it's an unchecked cast
-		// @SuppressWarnings("unchecked")
-		// JComboBox<String> source = (JComboBox<String>) e.getSource();
-		// // this figures out which numbered item it is in the combobox
-		// // and then sets the instance variable numMoves to that number
-		// numMoves = Integer.parseInt((String) source.getSelectedItem());
-		// System.out.println("num moves is now " + numMoves);
-		// canvas.repaint();
-		// }
-		// });
-		// menuBar.add(numMovesSelector);
-		//
-		// // checkbox to decide whether to show all moves along the way, or
-		// just
-		// // the most recent possibilities
-		// final JCheckBoxMenuItem inclusiveCheckBox = new
-		// JCheckBoxMenuItem("show all moves");
-		// inclusiveCheckBox.setSelected(false);
-		// menuBar.add(inclusiveCheckBox);
-		// inclusiveCheckBox.addActionListener(new ActionListener() {
-		// @Override
-		// public void actionPerformed(ActionEvent e) {
-		// System.out.println(e.getActionCommand());
-		// inclusive = inclusiveCheckBox.isSelected();
-		// canvas.repaint();
-		// }
-		// });
-		// inclusiveCheckBox.setMaximumSize(inclusiveCheckBox.getPreferredSize());
-		//
-		// // Should we pay attention to the transportation types (taxi, bus,
-		// // underground)
-		// // that Mr X can use when we compute the next 5 moves?
-		// final JCheckBoxMenuItem useTransportType = new JCheckBoxMenuItem("use
-		// transport types");
-		// useTransportType.setSelected(false);
-		// menuBar.add(useTransportType);
-		// useTransportType.addActionListener(new ActionListener() {
-		// @Override
-		// public void actionPerformed(ActionEvent e) {
-		// System.out.println(e.getActionCommand());
-		// useTransportTypes = useTransportType.isSelected();
-		// canvas.repaint();
-		// }
-		// });
-		// useTransportType.setMaximumSize(useTransportType.getPreferredSize());
-		//
-		// // menu for selecting transportation types
-		// // this is actually a top-level menu with a series of sub-menus
-		// JMenu transportMenu = new JMenu("Transportation types");
-		// // Add transportation types for up to 5 moves
-		// transportMenu.add(makeTransportSelectorMenu());
-		// transportMenu.add(makeTransportSelectorMenu());
-		// transportMenu.add(makeTransportSelectorMenu());
-		// transportMenu.add(makeTransportSelectorMenu());
-		// transportMenu.add(makeTransportSelectorMenu());
-		// menuBar.add(transportMenu);
-
-		// now add the menubar to our JFrame
 		setJMenuBar(menuBar);
 	}
-
-	// // Helper method to make a menu with 4 options (any, taxi, bus,
-	// underground)
-	// // that will update the menu title when you select one
-	// private JMenu makeTransportSelectorMenu() {
-	// // defaut is "any"
-	// JMenu selectorMenu = new JMenu("any");
-	// // add menu items for the 4 transport types
-	// selectorMenu.add(new JMenuItem("any"));
-	// selectorMenu.add(new JMenuItem("taxi"));
-	// selectorMenu.add(new JMenuItem("bus"));
-	// selectorMenu.add(new JMenuItem("underground"));
-	// // now add an ActionListener that changes the name of the
-	// // transport type in the JMenu and also updates the instance variable
-	// // that lists the transport types
-	// for (int i = 0; i < selectorMenu.getItemCount(); i++) {
-	// selectorMenu.getItem(i).addActionListener(new ActionListener() {
-	// @Override
-	// public void actionPerformed(ActionEvent e) {
-	// // I'm not going to lie: this method is kind of a hack...
-	// // But, I couldn't figure out how else to make it work.
-	//
-	// // transportType will be any, taxi, bus, or underground
-	// String transportType = e.getActionCommand();
-	// // get the JMenuItem that was clicked
-	// JMenuItem menuItem = (JMenuItem) e.getSource();
-	// // really indirect way to get back to the menu that this
-	// // menu item was part of
-	// JMenu menu = (JMenu) ((JPopupMenu) menuItem.getParent()).getInvoker();
-	// // change the label of the menu to reflect the
-	// // transportation type that was chosen
-	// menu.setText(transportType);
-	// // now get the top-level menu that owns the sub-menus for
-	// // each move
-	// JMenu topLevelMenu = (JMenu) ((JPopupMenu)
-	// menu.getParent()).getInvoker();
-	// // This is a relatively indirect way to figure out which
-	// // menu
-	// // contained the menu item that was clicked. But it works!
-	// for (int i = 0; i < topLevelMenu.getItemCount(); i++) {
-	// if (topLevelMenu.getItem(i) == menu) {
-	// // we've found the menu
-	// transportTypes.set(i, transportType);
-	// System.out.printf("move number %d uses transport type %s\n", i,
-	// transportType);
-	// break;
-	// }
-	// }
-	// }
-	// });
-	// }
-	// return selectorMenu;
-	// }
 
 	private void addMouseHandlers() {
 		canvas.addMouseListener(new MouseAdapter() {
@@ -403,5 +289,61 @@ public class ScotlandYardFrame extends JFrame {
 			return item;
 		}
 	}
-
+	
+	/**
+	 * Class to show all of data of the game 
+	 * 
+	 * @author Shogo Akiyama
+	 *
+	 */
+	class DataPanel extends JPanel {
+		
+		public DataPanel(int width, int height){
+			this.setPreferredSize(new Dimension(width, height));
+			this.setBackground(Color.BLACK);
+			this.add(new StatusPanel(width, 450));
+			this.setVisible(true);
+		}
+		
+	}
+	
+	/**
+	 * Class to show all people in the game
+	 * @author Shogo Akiyama
+	 *
+	 */
+	class StatusPanel extends JPanel {
+		
+		public StatusPanel(int width, int height){
+			this.setPreferredSize(new Dimension(width, height));
+			this.setBackground(Color.BLUE);
+			this.setLayout(new GridLayout(3,2));
+			this.add(new PersonStatusPanel());
+			this.add(new PersonStatusPanel());
+			this.add(new PersonStatusPanel());
+			this.add(new PersonStatusPanel());
+			//this.add(new PersonStatusPanel(width/2, height/3));
+			//this.add(new PersonStatusPanel(width/2, height/3));
+			this.setVisible(true);
+		}
+		
+	}
+	
+	/**
+	 * Class to show the data of each person in the game
+	 *  
+	 * @author Shogo Akiyama
+	 *
+	 */
+	class PersonStatusPanel extends JPanel {
+		
+		public PersonStatusPanel(){
+			this.setBackground(Color.PINK);
+			this.setBorder(new BevelBorder(BevelBorder.RAISED));
+			this.setVisible(true);
+			this.add(new JLabel("Name"));
+			//this.
+		}
+	}
+	
 }
