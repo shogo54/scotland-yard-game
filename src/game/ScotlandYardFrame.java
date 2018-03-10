@@ -1,4 +1,4 @@
-package ScotlandYardFrame;
+package game;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
-import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -31,8 +30,6 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.border.BevelBorder;
 
-import ScotlandYardFrame.DataPanel.PersonStatusPanel;
-import ScotlandYardFrame.DataPanel.StatusPanel;
 import graph.Node;
 import main.Main;
 import player.Detective;
@@ -162,6 +159,7 @@ public class ScotlandYardFrame extends JFrame {
 		this.setLocation(0, 0);
 
 		addWindowListener(new WindowAdapter() {
+			@Override
 			public void windowClosing(WindowEvent e) {
 				System.exit(0);
 			}
@@ -301,7 +299,7 @@ public class ScotlandYardFrame extends JFrame {
 		public DataPanel(int width, int height){
 			this.setPreferredSize(new Dimension(width, height));
 			this.setBackground(Color.BLACK);
-			this.add(new StatusPanel(width, 450));
+			this.add(new StatusPanel(width, 450), BorderLayout.NORTH);
 			this.setVisible(true);
 		}
 		
@@ -322,8 +320,8 @@ public class ScotlandYardFrame extends JFrame {
 			this.add(new PersonStatusPanel());
 			this.add(new PersonStatusPanel());
 			this.add(new PersonStatusPanel());
-			//this.add(new PersonStatusPanel(width/2, height/3));
-			//this.add(new PersonStatusPanel(width/2, height/3));
+			this.add(new PersonStatusPanel());
+			this.add(new PersonStatusPanel());
 			this.setVisible(true);
 		}
 		

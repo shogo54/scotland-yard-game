@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import ScotlandYardFrame.GameMaster;
 import ai.*;
+import game.GameMaster;
 import graph.Node;
 import main.Main;
 

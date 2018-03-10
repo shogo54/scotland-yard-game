@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import ScotlandYardFrame.GameMaster;
+import game.GameMaster;
 import graph.Node;
 import player.MrX;
 import player.Person.Ticket;

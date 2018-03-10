@@ -1,4 +1,4 @@
-package ScotlandYardFrame;
+package game;
 
 import java.awt.Point;
 import java.io.File;

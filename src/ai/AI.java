@@ -1,6 +1,6 @@
 package ai;
 
-import ScotlandYardFrame.GameMaster;
+import game.GameMaster;
 
 /**
  * Interface that will be implemented by CleverAI and RandomAI

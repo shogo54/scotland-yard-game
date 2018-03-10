@@ -1,6 +1,6 @@
 package main;
 
-import ScotlandYardFrame.ScotlandYardFrame;
+import game.ScotlandYardFrame;
 
 /**
  * Class just for main method
