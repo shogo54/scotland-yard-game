@@ -1,7 +1,5 @@
 # Scotland_Yard_Game
 
-Read Me First
-
 How to play
  - run the Main.java (src/main/Main.java)
 
@@ -10,8 +8,8 @@ Two versions of MrX
  - if you want to play easier mode, you need to change MrX instance in GameMaster class
  - change MrX class instance "mrx" from from CleverMrX to RandomMrX in the constructor of the class
  
-if you win, the pop up will tell you that you win
-if you loose, the pop up will tell you that you loose
+if you win, the pop up will tell you that you win.
+if you lose, the pop up will tell you that you lose
 
 Test play
  - as default, it shows where MrX is so that you can know the game works well
